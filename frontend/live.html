@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Live Detection</title>
+
+  <!-- Fonts (same as other pages) -->
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <!-- Your existing styles -->
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="nav.css"/>
+
+  <!-- ✅ ADD THIS CSS -->
+  <style>
+    .camera-container {
+        position: relative;
+        width: 100%;
+        max-width: 640px;
+        margin: 40px auto 0;
+    }
+
+    .btn-detect {
+        display: inline-block !important;
+    }
+
+    #webcam {
+        width: 100%;
+        display: block;
+        border-radius: 10px;
+    }
+
+    #output {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .status-overlay {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        z-index: 20;
+        padding: 8px 18px;
+        font-family: var(--font-h);
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        border: 1.5px solid transparent;
+        border-radius: 4px;
+        display: none;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .status-overlay::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        border-radius: 4px 0 0 4px;
+    }
+
+    .status-overlay.threat {
+        background: rgba(22, 15, 20, 0.85);
+        border-color: var(--danger);
+        color: var(--danger);
+        text-shadow: 0 0 10px rgba(255, 59, 85, 0.5);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(255, 59, 85, 0.05);
+        display: flex;
+    }
+
+    .status-overlay.threat::before {
+        background: var(--danger);
+        box-shadow: 0 0 8px var(--danger);
+    }
+
+    .status-overlay.safe {
+        background: rgba(15, 22, 20, 0.85);
+        border-color: var(--safe);
+        color: var(--safe);
+        text-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(0, 230, 118, 0.05);
+        display: flex;
+    }
+
+    .status-overlay.safe::before {
+        background: var(--safe);
+        box-shadow: 0 0 8px var(--safe);
+    }
+  </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<script src="nav.js"></script>
+
+<main>
+
+  <div class="page-title">
+    <h1>LIVE DETECTION</h1>
+    <div class="accent-line"></div>
+    <p>REAL-TIME WEBCAM ANALYSIS</p>
+  </div>
+
+  <!-- ✅ CAMERA + OUTPUT OVERLAY -->
+  <div class="camera-container">
+      <video id="webcam" autoplay playsinline></video>
+      <img id="output" />
+      <div id="status-overlay" class="status-overlay"></div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div style="text-align:center; margin-top:30px;">
+    <button class="btn-detect" onclick="startDetection()">START</button>
+    <button class="btn-action next" onclick="stopDetection()">STOP</button>
+  </div>
+
+</main>
+
+<footer>
+  WEAPONSCAN · YOLOV8S MINI PROJECT · DETECTION SYSTEM
+</footer>
+
+<!-- JS FILE -->
+<script src="live.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Video Detection — WeaponScan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="nav.css"/>
+
+  <style>
+    .video-container {
+        width: 100%;
+        max-width: 640px;
+        margin: 0 auto;
+        position: relative;
+        background: #05090d;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+    }
+    
+    .video-container video {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .btn-detect {
+        display: none;
+        margin: 0 auto;
+    }
+
+    /* Style tweak for centered loader */
+    .loader {
+        margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- main container -->
+  <main>
+    <div class="page-title">
+      <h1>Video Detection</h1>
+      <div class="accent-line"></div>
+      <p>UPLOAD A VIDEO FILE · PROCESS FRAME-BY-FRAME · VIEW ANNOTATED RESULT</p>
+    </div>
+
+    <!-- Upload Card -->
+    <div class="upload-card" id="upload-card">
+      <div class="br"></div>
+      <div class="bl"></div>
+      <div class="drop-zone" id="drop-zone">
+        <svg class="upload-svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <div class="drop-title">Drop Video Here</div>
+        <div class="drop-sub">MP4 · AVI · MOV · MKV · WEBM</div>
+        <button class="btn-browse" id="btn-browse">Browse File</button>
+      </div>
+      <div class="file-preview" id="file-preview">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M23 7l-7 5 7 5V7z"/>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+        </svg>
+        <span id="file-name">—</span>
+      </div>
+    </div>
+
+    <input type="file" id="file-input" accept="video/*"/>
+
+    <button class="btn-detect" id="btn-detect">&#x2B21; &nbsp; Process Video</button>
+
+    <div class="loader" id="loader">
+      <div class="spinner"></div>
+      <div class="loader-text">PROCESSING VIDEO (PLEASE WAIT)</div>
+    </div>
+
+    <div class="result-section" id="result-section">
+      <div class="verdict-banner safe" id="verdict-banner" style="border-left-width: 4px; padding: 16px 24px; font-family: var(--font-h);">
+        <div class="verdict-label" style="color: var(--accent); text-shadow: 0 0 15px rgba(0,200,255,0.4);">✓ SCAN COMPLETED</div>
+        <div class="verdict-meta" id="verdict-meta"></div>
+      </div>
+      
+      <div class="video-container">
+        <video id="result-video" controls></video>
+      </div>
+      
+      <div class="actions-row">
+        <a class="btn-action dl" id="download-btn" href="#" download="detection_result.mp4">&#8595; &nbsp; Download Result</a>
+        <button class="btn-action next" id="btn-next">&#8594; &nbsp; Next Video</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>WEAPONSCAN · YOLOV8S MINI PROJECT · DETECTION SYSTEM</footer>
+
+  <script src="nav.js"></script>
+  <script src="video.js"></script>
+</body>
+</html>
